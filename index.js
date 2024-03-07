@@ -10,6 +10,9 @@ mongoose.connect('mongodb+srv://varunmalpanivm01:RRDlp5VtFNAqmrSo@cluster0.mmhfp
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
+app.get("/", (req, res) => {
+    res.send("Express on Vercel");
+});
 
 const userSchema = new mongoose.Schema({
     username: String,
