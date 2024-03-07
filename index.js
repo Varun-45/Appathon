@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const cors = require('cors')
 const app = express();
 const port = 3000;
-
+app.use(cors())
 
 mongoose.connect('mongodb+srv://varunmalpanivm01:RRDlp5VtFNAqmrSo@cluster0.mmhfpfw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
