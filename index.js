@@ -12,6 +12,7 @@ mongoose.connect('mongodb+srv://varunmalpanivm01:RRDlp5VtFNAqmrSo@cluster0.mmhfp
 });
 app.get("/", (req, res) => {
     res.send("Express on Vercel");
+    console.log("hi")
 });
 
 const userSchema = new mongoose.Schema({
