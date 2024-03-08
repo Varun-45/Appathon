@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 
 const animalSchema = new Schema({
     userId: String,
-    animalName: String,
     animalId: String,
-    numberOfChilds: Number,
     animalType: {
         type: String,
         enum: ['Cow', 'Buffalo']
@@ -19,16 +17,7 @@ const animalSchema = new Schema({
     },
     DOB: Date,
     age: Number,
-    animalGirth: Number,
-    weight: Number,
-    pregnancyStatus: String,
-    lastCalving: Date,
-    lastDateOfAutoInsemination: Date,
-    lactationNumber: Number,
-    currentMilkingStage: {
-        type: String,
-        enum: ['Milking', 'Dry']
-    }
+    weight: Number
 
 });
 

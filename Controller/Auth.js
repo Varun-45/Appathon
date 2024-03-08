@@ -28,7 +28,6 @@ export const login = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: 'Invalid Phone number' });
         }
-
         // Successful login
         res.json({ message: 'Login successful' });
     } catch (error) {

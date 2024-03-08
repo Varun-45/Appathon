@@ -4,20 +4,12 @@ export const createAnimalProfile = async (req, res) => {
     try {
         const {
             userId,
-            animalName,
-            numberOfChilds,
             animalId,
             animalType,
             breed,
             animalGender,
             DOB,
-            animalGirth,
             weight,
-            pregnancyStatus,
-            lastCalving,
-            lastDateOfAutoInsemination,
-            lactationNumber,
-            currentMilkingStage
         } = req.body;
 
         // Check if an animal with the provided animalId already exists
@@ -30,21 +22,13 @@ export const createAnimalProfile = async (req, res) => {
         // Create a new animal profile
         const newAnimal = new Animal({
             userId,
-            animalName,
-            numberOfChilds,
             animalId,
             animalType,
             breed,
             animalGender,
             DOB,
             age: calculateage(DOB), // Assuming calculateAge function is defined elsewhere
-            animalGirth,
-            weight,
-            pregnancyStatus,
-            lastCalving,
-            lastDateOfAutoInsemination,
-            lactationNumber,
-            currentMilkingStage
+            weight
         });
 
         // Save the new animal profile to the database

@@ -76,3 +76,25 @@ export const getTotalMilkProductionByAnimalId = async (req, res) => {
         res.status(500).json({ message: 'Error getting total milk production by animalId', error: error.message });
     }
 };
+
+export const getMilkProductionLastMonth = async (req, res) => {
+    try {
+        const currentDate = new Date();
+        const currentMonthStartDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+        const currentMonthEndDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59, 999);
+
+        const milkProductionRecords = await MilkProduction.find({
+            milkingDate: { $gte: currentMonthStartDate, $lte: currentMonthEndDate }
+        });
+
+        let totalMilkProduction = 0;
+        for (const record of milkProductionRecords) {
+            totalMilkProduction += record.milkQuantity;
+        }
+
+        res.status(200).json({ totalMilkProduction });
+    } catch (error) {
+        res.status(500).json({ message: 'Error getting milk production of last month', error: error.message });
+    }
+};
