@@ -25,6 +25,7 @@ const milkProductionSchema = new mongoose.Schema({
         enum: ['Yes', 'No'],
         required: true
     },
+
     remarks: String,
     createdAt: {
         type: Date,

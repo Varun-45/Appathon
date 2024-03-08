@@ -4,9 +4,7 @@ import { MilkProduction } from "../models/MilkProd.js"
 export const createMilkProductionRecord = async (req, res) => {
     try {
         const {
-            animalType,
             animalIdentificationNumber,
-            milkingDate,
             milkingShift,
             milkQuantity,
             abnormalMilk,
@@ -14,9 +12,8 @@ export const createMilkProductionRecord = async (req, res) => {
         } = req.body;
 
         const newMilkProductionRecord = new MilkProduction({
-            animalType,
             animalIdentificationNumber,
-            milkingDate,
+            milkingDate: Date.now(),
             milkingShift,
             milkQuantity,
             abnormalMilk,
