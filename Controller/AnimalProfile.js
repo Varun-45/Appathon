@@ -6,6 +6,7 @@ export const createAnimalProfile = async (req, res) => {
             userId,
             animalName,
             numberOfChilds,
+            animalId,
             animalType,
             breed,
             animalGender,
@@ -19,16 +20,24 @@ export const createAnimalProfile = async (req, res) => {
             currentMilkingStage
         } = req.body;
 
+        // Check if an animal with the provided animalId already exists
+        const existingAnimal = await Animal.findOne({ animalId });
 
+        if (existingAnimal) {
+            return res.status(400).json({ message: 'AnimalId already exists' });
+        }
+
+        // Create a new animal profile
         const newAnimal = new Animal({
             userId,
             animalName,
             numberOfChilds,
+            animalId,
             animalType,
             breed,
             animalGender,
             DOB,
-            age: calculateage(DOB),
+            age: calculateage(DOB), // Assuming calculateAge function is defined elsewhere
             animalGirth,
             weight,
             pregnancyStatus,
@@ -38,6 +47,7 @@ export const createAnimalProfile = async (req, res) => {
             currentMilkingStage
         });
 
+        // Save the new animal profile to the database
         await newAnimal.save();
 
         res.status(201).json({ message: 'Animal profile created successfully', animal: newAnimal });
@@ -45,6 +55,7 @@ export const createAnimalProfile = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 };
+
 
 const calculateage = (DOB) => {
     var today = new Date();

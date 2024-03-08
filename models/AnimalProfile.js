@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const animalSchema = new Schema({
     userId: String,
     animalName: String,
-    animalId: Schema.Types.ObjectId,
+    animalId: String,
     numberOfChilds: Number,
     animalType: {
         type: String,
