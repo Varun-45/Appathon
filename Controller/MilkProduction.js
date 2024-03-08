@@ -3,6 +3,7 @@ import { MilkProduction } from "../models/MilkProd.js"
 
 export const createMilkProductionRecord = async (req, res) => {
     try {
+        const userId = req.params.userId;
         const {
             animalIdentificationNumber,
             milkingShift,
@@ -12,6 +13,7 @@ export const createMilkProductionRecord = async (req, res) => {
         } = req.body;
 
         const newMilkProductionRecord = new MilkProduction({
+            userId: userId,
             animalIdentificationNumber,
             milkingDate: Date.now(),
             milkingShift,
@@ -32,7 +34,7 @@ export const createMilkProductionRecord = async (req, res) => {
 export const calculateMilkProductionForDate = async (req, res) => {
     try {
         const { date } = req.body;
-
+        const userId = req.params.userId
         if (!date) {
             return res.status(400).json({ message: 'Date parameter is required' });
         }
@@ -43,6 +45,7 @@ export const calculateMilkProductionForDate = async (req, res) => {
         endOfDay.setHours(23, 59, 59, 999);
 
         const milkProductionRecords = await MilkProduction.find({
+            userId,
             milkingDate: { $gte: startOfDay, $lte: endOfDay }
         });
 
@@ -60,12 +63,12 @@ export const calculateMilkProductionForDate = async (req, res) => {
 export const getTotalMilkProductionByAnimalId = async (req, res) => {
     try {
         const { animalId } = req.body;
-
+        const userId = req.params.userId
         if (!animalId) {
             return res.status(400).json({ message: 'AnimalId parameter is required' });
         }
 
-        const milkProductionRecords = await MilkProduction.find({ animalIdentificationNumber: animalId });
+        const milkProductionRecords = await MilkProduction.find({ animalIdentificationNumber: animalId, userId });
 
         let totalMilkQuantity = 0;
         for (const record of milkProductionRecords) {
@@ -81,11 +84,12 @@ export const getMilkProductionLastMonth = async (req, res) => {
     try {
         const currentDate = new Date();
         const currentMonthStartDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-
+        const userId = req.params.userId
         const currentMonthEndDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59, 999);
 
         const milkProductionRecords = await MilkProduction.find({
-            milkingDate: { $gte: currentMonthStartDate, $lte: currentMonthEndDate }
+            milkingDate: { $gte: currentMonthStartDate, $lte: currentMonthEndDate },
+            userId
         });
 
         let totalMilkProduction = 0;

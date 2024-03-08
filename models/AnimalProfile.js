@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const animalSchema = new Schema({
-    userId: String,
+
     animalId: String,
     animalType: {
         type: String,

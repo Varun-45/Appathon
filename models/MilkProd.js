@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 
 
 const milkProductionSchema = new mongoose.Schema({
-
+    userId: String,
     animalIdentificationNumber: {
         type: String,
         required: true
     },
+    userId: String,
     milkingDate: {
         type: Date,
         required: true
