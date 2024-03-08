@@ -67,6 +67,21 @@ export const getAnimalProfilesByUserId = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 };
+export const getAnimalIdsByUserId = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        if (!userId) {
+            return res.status(400).json({ message: 'userId is required' });
+        }
+
+        const animalProfiles = await Animal.find({ userId }, 'animalId');
+        const animalIds = animalProfiles.map(profile => profile.animalId);
+        res.status(200).json(animalIds);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+};
 
 
 export const searchAnimalById = async (req, res) => {
