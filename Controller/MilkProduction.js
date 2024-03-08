@@ -56,3 +56,23 @@ export const calculateMilkProductionForDate = async (req, res) => {
         res.status(500).json({ message: 'Error calculating milk production for date', error: error.message });
     }
 };
+
+export const getTotalMilkProductionByAnimalId = async (req, res) => {
+    try {
+        const { animalId } = req.body;
+
+        if (!animalId) {
+            return res.status(400).json({ message: 'AnimalId parameter is required' });
+        }
+
+        const milkProductionRecords = await MilkProduction.find({ animalIdentificationNumber: animalId });
+
+        let totalMilkQuantity = 0;
+        for (const record of milkProductionRecords) {
+            totalMilkQuantity += record.milkQuantity;
+        }
+        res.status(200).json({ animalId, totalMilkQuantity });
+    } catch (error) {
+        res.status(500).json({ message: 'Error getting total milk production by animalId', error: error.message });
+    }
+};
