@@ -10,7 +10,7 @@ import { getAllQnA, postAnswer, postQuestion } from '../Controller/QnA.js';
 routes.post('/signup', saveUser);
 routes.post('/login', login);
 routes.post('/registerCattle', createAnimalProfile)
-routes.get('/getanimals', getAnimalProfilesByUserId)
+routes.get('/getanimals/:userId', getAnimalProfilesByUserId)
 routes.post('/createrecord', createMilkProductionRecord)
 routes.get('/getmilkprodbydate', calculateMilkProductionForDate)
 routes.get('/getmilkprodbyId', getTotalMilkProductionByAnimalId)

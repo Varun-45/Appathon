@@ -70,7 +70,7 @@ const calculateage = (DOB) => {
 
 export const getAnimalProfilesByUserId = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const userId = req.params.userId;
 
         if (!userId) {
             return res.status(400).json({ message: 'userId is required' });
