@@ -5,6 +5,7 @@ import { saveUser, login } from '../Controller/Auth.js';
 import { createAnimalProfile, getAnimalProfilesByUserId } from '../Controller/AnimalProfile.js';
 import { calculateMilkProductionForDate, createMilkProductionRecord, getMilkProductionLastMonth, getTotalMilkProductionByAnimalId } from '../Controller/MilkProduction.js';
 import { getAllQnA, postAnswer, postQuestion } from '../Controller/QnA.js';
+import { getStockPosition, updateStockPosition } from '../Controller/Stock.js';
 
 
 routes.post('/signup', saveUser);
@@ -18,4 +19,6 @@ routes.get('/getQtylastMonth', getMilkProductionLastMonth)
 routes.post('/questionpost', postQuestion)
 routes.post('/postAnswer', postAnswer)
 routes.get('/getallqna', getAllQnA)
+routes.get('/stock', getStockPosition)
+routes.post('/update', updateStockPosition)
 export default routes
