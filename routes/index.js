@@ -6,6 +6,7 @@ import { createAnimalProfile, getAnimalIdsByUserId, getAnimalProfilesByUserId, s
 import { calculateMilkProductionForDate, createMilkProductionRecord, getMilkProductionLastMonth, getOldProducts, getTotalMilkProductionByAnimalId } from '../Controller/MilkProduction.js';
 import { getAllQnA, postAnswer, postQuestion } from '../Controller/QnA.js';
 import { getStockPosition, updateStockPosition } from '../Controller/Stock.js';
+import { whatsapp } from '../Controller/whatsappMessage.js';
 
 
 routes.post('/signup', saveUser);
@@ -24,4 +25,5 @@ routes.get('/getallqna', getAllQnA)
 routes.get('/stock/:userId', getStockPosition)
 routes.post('/updatestock/:userId', updateStockPosition)
 routes.get('/alertprod/:userId', getOldProducts)
+routes.get('/sndmsg', whatsapp)
 export default routes

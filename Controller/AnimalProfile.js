@@ -41,15 +41,11 @@ export const createAnimalProfile = async (req, res) => {
 };
 
 
-const calculateage = (DOB) => {
-    var today = new Date();
-    var birthDate = new Date(DOB);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
+function calculateage(dob) {
+    var diff_ms = Date.now() - dob.getTime();
+    var age_dt = new Date(diff_ms);
+
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
 
 export const getAnimalProfilesByUserId = async (req, res) => {
