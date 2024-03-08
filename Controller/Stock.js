@@ -58,7 +58,7 @@ export const updateStockPosition = async (req, res) => {
         res.status(200).json({
             totalStock: stockPosition.totalStock,
             soldStock: stockPosition.soldStock,
-            availableStock: stockPosition.availableStock
+            availableStock: stockPosition.totalStock - stockPosition.soldStock
         });
     } catch (error) {
         res.status(500).json({ message: 'Error updating stock position', error: error.message });
