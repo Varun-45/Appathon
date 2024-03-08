@@ -4,11 +4,10 @@ import { User } from "../models/User.js"
 
 export const saveUser = async (req, res) => {
     const { username, otp, phoneNo, address } = req.body;
-
     try {
         const existingUser = await User.findOne({ phoneNo });
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'User with the provided phone number already exists' });
         }
 
         // Create a new user
