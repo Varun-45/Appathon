@@ -16,5 +16,5 @@ routes.get('/getmilkprodbydate', calculateMilkProductionForDate)
 routes.get('/getmilkprodbyId', getTotalMilkProductionByAnimalId)
 routes.post('/questionpost', postQuestion)
 routes.post('/postAnswer', postAnswer)
-routes.post('/getallqna', getAllQnA)
+routes.get('/getallqna', getAllQnA)
 export default routes
