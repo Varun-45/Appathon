@@ -10,6 +10,6 @@ routes.post('/signup', saveUser);
 routes.post('/login', login);
 routes.post('/registerCattle', createAnimalProfile)
 routes.get('/getanimals', getAnimalProfilesByUserId)
-routes.post('/createRecord', createMilkProductionRecord)
+routes.post('/createrecord', createMilkProductionRecord)
 
 export default routes
