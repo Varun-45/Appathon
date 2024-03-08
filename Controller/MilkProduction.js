@@ -102,3 +102,19 @@ export const getMilkProductionLastMonth = async (req, res) => {
         res.status(500).json({ message: 'Error getting milk production of last month', error: error.message });
     }
 };
+export const getOldProducts = async (req, res) => {
+    try {
+        const userId = req.params.userId
+        const twoDaysAgo = new Date();
+        twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+        const oldProducts = await MilkProduction.find({
+            milkingDate: { $lt: twoDaysAgo },
+            userId
+        });
+
+        res.status(200).json({ oldProducts });
+    } catch (error) {
+        res.status(500).json({ message: 'Error getting old products', error: error.message });
+    }
+};
