@@ -6,11 +6,9 @@ export const getStockPosition = async (req, res) => {
     try {
         const userId = req.params.userId; // Assuming userId is passed in the request parameters
 
-        // Query the stock position data specific to the user
         let stockPosition = await StockPosition.findOne({ userId });
 
         if (!stockPosition) {
-            // If stock position data doesn't exist for the user, create a new document
             const totalStockAggregation = await MilkProduction.aggregate([
                 { $match: { userId } }, // Filter milk production records by userId
                 { $group: { _id: null, totalStock: { $sum: '$milkQuantity' } } }
@@ -43,19 +41,17 @@ export const getStockPosition = async (req, res) => {
 
 export const updateStockPosition = async (req, res) => {
     try {
-        const userId = req.params.userId; // Assuming userId is passed in the request parameters
+        const userId = req.params.userId;
         const { soldMilk } = req.body;
 
-        // Find or create the stock position data specific to the user
         let stockPosition = await StockPosition.findOne({ userId });
 
         if (!stockPosition) {
             stockPosition = new StockPosition({ userId });
         }
 
-        // Update sold and available stock based on the soldMilk
-        stockPosition.soldStock += soldMilk;
-        stockPosition.availableStock -= soldMilk;
+        stockPosition.soldStock += parseInt(soldMilk)
+        stockPosition.availableStock -= stockPosition.totalStock - stockPosition.soldStock;
 
         await stockPosition.save();
 

@@ -19,6 +19,6 @@ routes.get('/getQtylastMonth/:userId', getMilkProductionLastMonth)
 routes.post('/questionpost', postQuestion)
 routes.post('/postAnswer', postAnswer)
 routes.get('/getallqna', getAllQnA)
-routes.get('/stock', getStockPosition)
-routes.post('/update', updateStockPosition)
+routes.get('/stock/:userId', getStockPosition)
+routes.post('/updatestock/:userId', updateStockPosition)
 export default routes
