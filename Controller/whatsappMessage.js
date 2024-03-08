@@ -6,6 +6,6 @@ export const whatsapp = async (req, res) => {
     const whatsappUrl = `https://api.whatsapp.com/send?text=${messageText}`;
 
     console.log(whatsappUrl)
-    res.redirect(whatsappUrl);
+    res.json(whatsappUrl);
 
 }
