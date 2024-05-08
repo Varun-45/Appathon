@@ -7,7 +7,10 @@ const port = 3000;
 import routes from './routes/index.js'
 app.use(cors())
 
-
+mongoose.connect('mongodb+srv://varunmalpanivm01:RRDlp5VtFNAqmrSo@cluster0.mmhfpfw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 app.get("/", (req, res) => {
     res.send("Express on Vercel");
     console.log("hi")
